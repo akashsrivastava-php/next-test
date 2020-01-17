@@ -1,21 +1,7 @@
 import React from "react";
-// reactstrap components
-import {
-  Collapse,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
-  UncontrolledTooltip
-} from "reactstrap";
+import { Collapse, DropdownToggle, DropdownMenu, DropdownItem, UncontrolledDropdown, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container, UncontrolledTooltip } from "reactstrap";
 
-function ExamplesNavbar() {
+function MenuNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   React.useEffect(() => {
@@ -174,4 +160,4 @@ function ExamplesNavbar() {
   );
 }
 
-export default ExamplesNavbar;
+export default MenuNavbar;

@@ -12,6 +12,9 @@ process.env.ENV_FILE = `./.environment/.env.${environment}`
 
 module.exports = withSass(
     withCss({
+        devIndicators: {
+            autoPrerender: false,
+        },
         cssLoaderOptions: {
             url: false,
         },
@@ -26,11 +29,6 @@ module.exports = withSass(
                 test: /\.(svg|eot|ttf|woff|woff2)$/,
                 use: {
                     loader: 'url-loader',
-                    options: {
-                        limit: 5,
-                        name: 'static/fonts/[hash].[ext]',
-                        publicPath: '/_next',
-                    },
                 },
             });
 
