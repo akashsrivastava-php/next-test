@@ -1,9 +1,11 @@
 import React from 'react'
 import App from 'next/app'
+import { toast } from 'react-toastify'
 import "../public/assets/css/bootstrap.min.css";
 import "../public/assets/scss/now-ui-kit.scss";
 import "../public/assets/demo/demo.css";
 import "../public/assets/demo/nucleo-icons-page-styles.css";
+import 'react-toastify/dist/ReactToastify.css';
 
 class MyApp extends App {
   // Only uncomment this method if you have blocking data requirements for
@@ -17,6 +19,10 @@ class MyApp extends App {
   //
   //   return { ...appProps }
   // }
+
+  componentDidMount(){
+    toast.configure()
+  }
 
   render() {
     const { Component, pageProps } = this.props

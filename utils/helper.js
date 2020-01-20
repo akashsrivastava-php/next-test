@@ -1,7 +1,8 @@
 import axios from 'axios';
 import validator from 'validator';
+import { toast } from 'react-toastify'
 
-const { API_URL } = process.env.customKey
+const { API } = process.env.customKey
 
 export const validateForm = (formData, rules) => {
     let isValid
@@ -22,13 +23,18 @@ export const validateForm = (formData, rules) => {
     return isValid
 }
 
-export const postData = (params) => {
-    axios
-    .get('/user', params)
+export const postData = (params, url) => {
+   return axios
+    .post(`${API}/${url}`, params)
     .then((res) => {
-        console.log(res);
+        if(res.data.error){
+            toast.error(res.data.error.message)
+            return { status : false, data: {} }
+        }else{
+            return { status: true, data: res.data }
+        }
     })
-    .catch(function (error) {
-        console.log(error);
+    .catch((err) => {
+        console.log(err);
     })
 }

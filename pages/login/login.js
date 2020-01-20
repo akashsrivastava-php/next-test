@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, CardHeader, CardBody, Form, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Col } from "reactstrap";
 import { validateForm } from '../../utils/helper'
+import { login } from '../../utils/api/login'
 import MenuNavbar from "../../components/Navbars/MenuNavbar";
 import TransparentFooter from "../../components/Footers/TransparentFooter";
 
@@ -40,11 +41,16 @@ function LoginPage() {
         };
     });
 
-    const handelSubmit = (e) => {
+    const handelSubmit = async (e) => {
         e.preventDefault()
         const formData =  new FormData(e.target);
-        const res = validateForm(formData, rules)
-        console.log(res)
+        const valid = validateForm(formData, rules)
+        if(valid){
+            const res = await login(formData)
+            if(res.status){
+                console.log(res.data)
+            }
+        }
     }
 
     return (

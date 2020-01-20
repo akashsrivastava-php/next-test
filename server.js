@@ -13,6 +13,7 @@ const routes = require('./routes')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = routes.getRequestHandler(app)
+const devProxy = require('./utils/proxy')
 
 const port = parseInt(process.env.PORT,10)
 
@@ -20,6 +21,14 @@ const { BUILD_DIRECTORY } = process.env
 
 app.prepare().then(() => {
 	const server = express()
+
+	if (devProxy) {
+		const proxyMiddleware = require('http-proxy-middleware')
+		Object.keys(devProxy).forEach((context) => {
+			server.use(proxyMiddleware(context, devProxy[context]))
+		})
+	}
+
 	/* APPLYING CORS & COMPRESSION  */
 	server.use(cors())
 	server.use(cookieParser())
